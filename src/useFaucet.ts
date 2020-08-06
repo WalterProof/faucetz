@@ -8,7 +8,8 @@ function useFaucet(
     email: string,
     password: string,
     mnemonic: string,
-    secret: string
+    secret: string,
+    balanceRefresh: boolean
 ) {
     const signer = InMemorySigner.fromFundraiser(email, password, mnemonic);
     Tezos.setProvider({rpc, signer});
@@ -37,7 +38,7 @@ function useFaucet(
             setIsLoading(false);
         }
         initialize();
-    }, [secret]);
+    }, [balanceRefresh, secret]);
 
     return {isLoading, pkh, balance};
 }

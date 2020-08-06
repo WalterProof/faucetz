@@ -21,25 +21,41 @@ function App() {
     const [amount, setAmount] = useState(25);
     const [alertMsg, setAlertMsg] = useState("");
     const [transferRequested, setTransferRequested] = useState(false);
+    const [balanceRefresh, setBalanceRefresh] = useState(false);
 
     useEffect(() => {
         async function transfer() {
-            const op = await Tezos.contract.transfer({
-                to: toAddress,
-                amount: amount
-            });
-            setAlertMsg(`operation ${op.hash} in progress`);
+            try {
+                const op = await Tezos.contract.transfer({
+                    to: toAddress,
+                    amount: amount
+                });
+
+                setAlertMsg(`operation ${op.hash} in progress`);
+
+                await op.confirmation(1);
+
+                setAlertMsg(`operation ${op.hash} confirmed`);
+                setBalanceRefresh(true);
+            } catch (e) {
+                setAlertMsg(`oops something bad happened: ${e}`);
+            }
         }
 
         if (transferRequested) {
             transfer();
+            setTransferRequested(false);
         }
-    }, [transferRequested]);
+
+        return () => {
+            setBalanceRefresh(false);
+        };
+    }, [amount, toAddress, transferRequested]);
 
     return (
         <Container p={1}>
             <Flex sx={{ flexDirection: "column" }}>
-                <Header />
+                <Header balanceRefresh={balanceRefresh} />
                 {alertMsg && <Alert my={2}>{alertMsg}</Alert>}
                 <Box
                     as="form"
