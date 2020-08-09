@@ -8,7 +8,7 @@ import DALPHA_FAUCET from "./faucets/tz1SobXCTNgZvX6JBgdXnC5yz4J7zXqfFF4C.json";
 type Nodes = {[key: string]: string};
 export const NODES: Nodes = {
     carthagenet: "https://testnet-tezos.giganode.io",
-    dalphanet: "http://35.187.1.13:8732"
+    dalphanet: "https://35.187.1.13"
 };
 
 function useFaucet(rpc: string, balanceRefresh: boolean) {
