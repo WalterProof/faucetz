@@ -1,5 +1,7 @@
 # FauceTZ
 
+![ci](https://github.com/catsoap/faucetz/workflows/ci/badge.svg)
+
 Testnet faucet for the Tezos blockchain
 
 Features: 

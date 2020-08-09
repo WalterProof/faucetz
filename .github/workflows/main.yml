@@ -14,15 +14,15 @@ jobs:
         with:
           node-version: '10'
       - name: Checkout Repo
-        uses: actions/checkout@master
+        uses: actions/checkout@v2
       - name: Install Dependencies
         run: yarn install
       - name: Test
         run: yarn run test
       - name: Build
-        run: npm run build
+        run: yarn run build
       - name: Archive Production Artifact
-        uses: actions/upload-artifact@master
+        uses: actions/upload-artifact@v2
         with:
           name: build
           path: build
@@ -39,9 +39,10 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@master
       - name: Download Artifact
-        uses: actions/download-artifact@master
+        uses: actions/download-artifact@v2
         with:
           name: build
+          path: build
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
