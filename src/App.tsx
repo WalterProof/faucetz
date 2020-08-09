@@ -38,7 +38,9 @@ function App() {
                 setAlertMsg(`operation ${op.hash} confirmed`);
                 setBalanceRefresh(true);
             } catch (e) {
-                setAlertMsg(`oops something bad happened: ${e}`);
+                setAlertMsg(
+                    `oops something bad happened: ${JSON.stringify(e)}`
+                );
             }
         }
 

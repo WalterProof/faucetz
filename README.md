@@ -10,7 +10,6 @@ Features:
 Roadmap:
 
 - connect wallet
-- allow for dalphanet option
 - register map of address with names, history, with quick links to explorers (centralised persistence or local storage)
 
 For alternatives testnet faucets, see:

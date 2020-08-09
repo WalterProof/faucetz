@@ -2,16 +2,26 @@ import {useEffect, useState} from "react";
 import {Tezos} from "@taquito/taquito";
 import {InMemorySigner} from "@taquito/signer";
 import BigNumber from "bignumber.js";
+import CARTHAGE_FAUCET from "./faucets/tz1KxuxXF1xu2dH7pkPQaJrUoBbLn8SsijWG.json";
+import DALPHA_FAUCET from "./faucets/tz1SobXCTNgZvX6JBgdXnC5yz4J7zXqfFF4C.json";
 
-function useFaucet(
-    rpc: string,
-    email: string,
-    password: string,
-    mnemonic: string,
-    secret: string,
-    balanceRefresh: boolean
-) {
-    const signer = InMemorySigner.fromFundraiser(email, password, mnemonic);
+type Nodes = {[key: string]: string};
+export const NODES: Nodes = {
+    carthagenet: "https://testnet-tezos.giganode.io",
+    dalphanet: "http://35.187.1.13:8732"
+};
+
+function useFaucet(rpc: string, balanceRefresh: boolean) {
+    const faucet = NODES.carthagenet.includes(rpc)
+        ? CARTHAGE_FAUCET
+        : DALPHA_FAUCET;
+    const {email, password, mnemonic, secret} = faucet;
+
+    const signer = InMemorySigner.fromFundraiser(
+        email,
+        password,
+        mnemonic.join(" ")
+    );
     Tezos.setProvider({rpc, signer});
 
     const [isLoading, setIsLoading] = useState(true);
