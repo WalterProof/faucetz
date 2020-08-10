@@ -17,29 +17,39 @@ function Header(props: any) {
     return (
         <Flex
             sx={{
-                alignItems: "center",
-                justifyContent: "space-between"
+                flexDirection: ["column", "row"],
+                justifyContent: "space-between",
+                alignItems: ["stretch", "center"]
             }}
         >
-            <Flex sx={{ alignItems: "center" }}>
-                <Heading as="h1">Fauce</Heading>
-                <PictoTZ />
+            <Flex
+                sx={{
+                    alignItems: "center",
+                    flexGrow: 1
+                }}
+            >
+                <Flex>
+                    <Heading as="h1">Fauce</Heading>
+                    <PictoTZ />
+                </Flex>
+                <Box sx={{ flexGrow: 1 }} pl={[5, 3]}>
+                    <Select defaultValue="carthagenet" onChange={updateNetwork}>
+                        <option>carthagenet</option>
+                        <option>dalphanet</option>
+                    </Select>
+                </Box>
             </Flex>
-            <Box sx={{ flexGrow: 2 }} p={4}>
-                <Select defaultValue="carthagenet" onChange={updateNetwork}>
-                    <option>carthagenet</option>
-                    <option>dalphanet</option>
-                </Select>
-            </Box>
 
-            <Box>
-                <FaucetAccount
-                    balance={balance}
-                    isLoading={isLoading}
-                    pkh={pkh}
-                    node={node}
-                />
-            </Box>
+            <Flex>
+                <Box pl={[0, 3]} py={[3, 0]}>
+                    <FaucetAccount
+                        balance={balance}
+                        isLoading={isLoading}
+                        pkh={pkh}
+                        node={node}
+                    />
+                </Box>
+            </Flex>
         </Flex>
     );
 }

@@ -5,6 +5,7 @@ export default {
     container: {
         maxWidth: 768
     },
+    breakpoints: ["40em"],
     buttons: {
         primary: {
             cursor: "pointer"
