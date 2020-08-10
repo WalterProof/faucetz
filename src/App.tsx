@@ -15,6 +15,7 @@ import {
 } from "theme-ui";
 import { ReactComponent as Logo } from "./svg/faucet.svg";
 import Header from "./components/Header";
+import Amount from "./components/Amount";
 
 function App() {
     const [toAddress, setToAddress] = useState("");
@@ -74,9 +75,11 @@ function App() {
                         }
                     }}
                 >
-                    <Flex>
-                        <Label htmlFor="toAddress">Amount</Label>
-                        <Box>{amount}&nbsp;ꜩ</Box>
+                    <Flex sx={{ justifyContent: "space-between" }}>
+                        <Label htmlFor="toAddress" sx={{ width: "auto" }}>
+                            Amount
+                        </Label>
+                        <Amount amount={amount} />
                     </Flex>
                     <Slider
                         defaultValue={amount}

@@ -38,7 +38,7 @@ function useFaucet(rpc: string, balanceRefresh: boolean) {
             setBalance(
                 `${new BigNumber(Tezos.format("mutez", "tz", balance)).toFixed(
                     2
-                )} ꜩ`
+                )}`
             );
 
             if (balance.isZero()) {

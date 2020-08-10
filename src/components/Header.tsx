@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { Box, Flex, Heading, Select, jsx } from "theme-ui";
 import FaucetAccount from "./FaucetAccount";
+import { ReactComponent as PictoTZ } from "../svg/tz-bold.svg";
 
 import useFaucet, { NODES } from "../useFaucet";
 
@@ -20,7 +21,10 @@ function Header(props: any) {
                 justifyContent: "space-between"
             }}
         >
-            <Heading as="h1">FauceTZ</Heading>
+            <Flex sx={{ alignItems: "center" }}>
+                <Heading as="h1">Fauce</Heading>
+                <PictoTZ />
+            </Flex>
             <Box sx={{ flexGrow: 2 }} p={4}>
                 <Select defaultValue="carthagenet" onChange={updateNetwork}>
                     <option>carthagenet</option>

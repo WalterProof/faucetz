@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import { Box, Flex, Text, Spinner, jsx } from "theme-ui";
+import Amount from "./Amount";
 
 function FaucetAccount(props: any) {
     const { balance, isLoading, node, pkh } = props;
@@ -15,7 +16,9 @@ function FaucetAccount(props: any) {
                     {node}
                 </Text>
             </Box>
-            <Box pl={4}>{balance}</Box>
+            <Box pl={4}>
+                <Amount amount={balance} />
+            </Box>
         </Flex>
     );
 }
