@@ -8,7 +8,7 @@ import DALPHA_FAUCET from "./faucets/tz1SobXCTNgZvX6JBgdXnC5yz4J7zXqfFF4C.json";
 type Nodes = {[key: string]: string};
 export const NODES: Nodes = {
     carthagenet: "https://testnet-tezos.giganode.io",
-    dalphanet: "https://35.187.1.13"
+    dalphanet: "https://dalphanet.duckdns.org"
 };
 
 function useFaucet(rpc: string, balanceRefresh: boolean) {
@@ -23,34 +23,37 @@ function useFaucet(rpc: string, balanceRefresh: boolean) {
         mnemonic.join(" ")
     );
     Tezos.setProvider({rpc, signer});
-
     const [isLoading, setIsLoading] = useState(true);
     const [pkh, setPKH] = useState("");
     const [balance, setBalance] = useState("");
+    const [error, setError] = useState("");
 
     useEffect(() => {
         async function initialize() {
             setIsLoading(true);
-            const pkh = await Tezos.signer.publicKeyHash();
-            setPKH(pkh);
+            try {
+                const pkh = await Tezos.signer.publicKeyHash();
+                setPKH(pkh);
 
-            const balance = await Tezos.tz.getBalance(pkh);
-            setBalance(
-                `${new BigNumber(Tezos.format("mutez", "tz", balance)).toFixed(
-                    2
-                )}`
-            );
+                const balance = await Tezos.tz.getBalance(pkh);
+                setBalance(
+                    `${new BigNumber(
+                        Tezos.format("mutez", "tz", balance)
+                    ).toFixed(2)}`
+                );
 
-            if (balance.isZero()) {
-                await Tezos.tz.activate(pkh, secret);
+                if (balance.isZero()) {
+                    await Tezos.tz.activate(pkh, secret);
+                }
+            } catch (e) {
+                setError(e.message);
             }
-
             setIsLoading(false);
         }
         initialize();
     }, [balanceRefresh, secret]);
 
-    return {isLoading, pkh, balance};
+    return {isLoading, pkh, balance, error};
 }
 
 export default useFaucet;
