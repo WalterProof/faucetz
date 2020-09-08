@@ -42,8 +42,9 @@ function Header(props: any) {
                             defaultValue="carthagenet"
                             onChange={updateNetwork}
                         >
-                            <option>carthagenet</option>
-                            <option>dalphanet</option>
+                            {Object.keys(NODES).map(network => (
+                                <option>{network}</option>
+                            ))}
                         </Select>
                     </Box>
                 </Flex>
