@@ -8,14 +8,15 @@ import {
     Button,
     Container,
     Flex,
+    Heading,
     Input,
     Label,
     Slider,
     jsx
 } from "theme-ui";
-import { ReactComponent as Logo } from "./svg/faucet.svg";
 import Header from "./components/Header";
-import Amount from "./components/Amount";
+import Network from "./components/Network";
+import DisplayAmount from "./components/DisplayAmount";
 
 function App() {
     const [toAddress, setToAddress] = useState("");
@@ -58,8 +59,9 @@ function App() {
     return (
         <Container p={1}>
             <Flex sx={{ flexDirection: "column" }}>
-                <Header balanceRefresh={balanceRefresh} />
+                <Header />
                 {alertMsg && <Alert my={2}>{alertMsg}</Alert>}
+                <Network balanceRefresh={balanceRefresh} />
                 <Box
                     as="form"
                     onSubmit={e => {
@@ -75,13 +77,17 @@ function App() {
                         }
                     }}
                 >
+                    <Heading as="h2" my={2}>
+                        Select an amount and address
+                    </Heading>
                     <Flex sx={{ justifyContent: "space-between" }}>
-                        <Label htmlFor="toAddress" sx={{ width: "auto" }}>
+                        <Label htmlFor="amount" sx={{ width: "auto" }}>
                             Amount
                         </Label>
-                        <Amount amount={amount} />
+                        <DisplayAmount amount={amount} />
                     </Flex>
                     <Slider
+                        id="amount"
                         defaultValue={amount}
                         onChange={e => setAmount(parseInt(e.target.value))}
                     />
@@ -95,16 +101,6 @@ function App() {
                     />
 
                     <Button>Submit</Button>
-                </Box>
-                <Box sx={{ position: "relative", paddingBottom: "300px" }}>
-                    <Logo
-                        sx={{
-                            position: "absolute",
-                            fill: "royalblue",
-                            height: "100%",
-                            width: "100%"
-                        }}
-                    />
                 </Box>
             </Flex>
         </Container>

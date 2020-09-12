@@ -2,9 +2,9 @@
 import { Box, Text, jsx } from "theme-ui";
 import { ReactComponent as PictoTZ } from "../svg/tz.svg";
 
-function Amount(props: any) {
+function DisplayAmount(props: any) {
     return (
-        <Box>
+        <Box sx={{ display: "inline" }}>
             <Text
                 sx={{
                     verticalAlign: "middle",
@@ -25,4 +25,4 @@ function Amount(props: any) {
     );
 }
 
-export default Amount;
+export default DisplayAmount;

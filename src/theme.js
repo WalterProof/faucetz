@@ -1,14 +1,47 @@
 import theme from "@theme-ui/preset-base";
+import {darken, lighten} from "@theme-ui/color";
 
 export default {
     ...theme,
+    colors: {
+        text: "#000",
+        background: "#e4ebef",
+        primary: "#4f8bb3",
+        secondary: "#30c",
+        muted: "#92bad3"
+    },
     container: {
         maxWidth: 768
     },
     breakpoints: ["40em"],
     buttons: {
         primary: {
-            cursor: "pointer"
+            outline: "none",
+            cursor: "pointer",
+            color: "white",
+            fontWeight: "bold",
+            bg: "primary",
+            borderBottomWidth: 4,
+            borderStyle: "solid",
+            borderColor: darken("primary", 0.1),
+            "&:hover": {
+                bg: lighten("primary", 0.1),
+                borderColor: "primary"
+            },
+            "&:focus": {
+                bg: lighten("primary", 0.1),
+                borderColor: "primary"
+            },
+            "&:active": {
+                bg: lighten("primary", 0.1),
+                borderColor: "primary"
+            }
+        }
+    },
+    styles: {
+        hr: {
+            bg: "muted",
+            height: "4px"
         }
     }
 };

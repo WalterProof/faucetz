@@ -1,25 +1,17 @@
-/** @jsx jsx */
-import { Box, Flex, Text, Spinner, jsx } from "theme-ui";
-import Amount from "./Amount";
+import React from "react";
+import { Text, Spinner } from "theme-ui";
+import DisplayAmount from "./DisplayAmount";
 
 function FaucetAccount(props: any) {
-    const { balance, isLoading, node, pkh } = props;
+    const { balance, isLoading, pkh } = props;
 
     return isLoading ? (
         <Spinner />
     ) : (
-        <Flex>
-            <Box>
-                <Text sx={{ fontSize: 1, color: "secondary" }}>
-                    {pkh}
-                    <br />
-                    {node}
-                </Text>
-            </Box>
-            <Box pl={4}>
-                <Amount amount={balance} />
-            </Box>
-        </Flex>
+        <Text my={2}>
+            The configured faucet account's address is {pkh} and its current
+            balance is <DisplayAmount amount={balance} />
+        </Text>
     );
 }
 
