@@ -1,17 +1,22 @@
-import React from "react";
-import { Text, Spinner } from "theme-ui";
+/** @jsx jsx */
+import { Box, Spinner, jsx } from "theme-ui";
 import DisplayAmount from "./DisplayAmount";
 
 function FaucetAccount(props: any) {
-    const { balance, isLoading, pkh } = props;
+    const { balance, isLoading, pkh, node } = props;
 
     return isLoading ? (
         <Spinner />
     ) : (
-        <Text my={2}>
-            The configured faucet account's address is {pkh} and its current
-            balance is <DisplayAmount amount={balance} />
-        </Text>
+        <Box my={2}>
+            <ul>
+                <li>{node}</li>
+                <li>{pkh}</li>
+                <li>
+                    <DisplayAmount amount={balance} />
+                </li>
+            </ul>
+        </Box>
     );
 }
 

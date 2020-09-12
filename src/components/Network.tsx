@@ -2,7 +2,8 @@
 import React, { useState } from "react";
 import { Alert, Box, Heading, Select, jsx } from "theme-ui";
 import FaucetAccount from "./FaucetAccount";
-import useFaucet, { NODES } from "../useFaucet";
+import useFaucet from "../useFaucet";
+import { NODES } from "../config";
 
 function Network(props: any) {
     const [node, setNode] = useState(NODES.carthagenet);
@@ -23,9 +24,7 @@ function Network(props: any) {
             {error && <Alert my={2}>{error}</Alert>}
             <Select defaultValue="carthagenet" onChange={updateNetwork}>
                 {Object.keys(NODES).map(network => (
-                    <option value={network}>
-                        {network} ({NODES[network]})
-                    </option>
+                    <option value={network}>{network}</option>
                 ))}
             </Select>
             <FaucetAccount
