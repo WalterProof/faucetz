@@ -7,7 +7,7 @@ export default {
         text: "#000",
         background: "#e4ebef",
         primary: "#4f8bb3",
-        secondary: "#30c",
+        secondary: "#D7DFE0",
         muted: "#92bad3"
     },
     container: {
@@ -39,6 +39,7 @@ export default {
         }
     },
     styles: {
+        ...theme.styles,
         hr: {
             bg: "muted",
             height: "4px"

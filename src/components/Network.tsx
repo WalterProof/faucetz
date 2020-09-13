@@ -7,6 +7,7 @@ import { NODES } from "../config";
 
 function Network(props: any) {
     const [node, setNode] = useState(NODES.carthagenet);
+
     const { isLoading, pkh, balance, error } = useFaucet(
         node,
         props.balanceRefresh
@@ -16,8 +17,17 @@ function Network(props: any) {
         setNode(NODES[e.currentTarget.value]);
     }
 
+    console.log(pkh, balance, isLoading);
+
     return (
         <Box>
+            <FaucetAccount
+                balance={balance}
+                isLoading={isLoading}
+                pkh={pkh}
+                node={node}
+            />
+
             <Heading as="h2" my={2}>
                 Select a network
             </Heading>
@@ -27,12 +37,6 @@ function Network(props: any) {
                     <option value={network}>{network}</option>
                 ))}
             </Select>
-            <FaucetAccount
-                balance={balance}
-                isLoading={isLoading}
-                pkh={pkh}
-                node={node}
-            />
         </Box>
     );
 }

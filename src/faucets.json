@@ -1,0 +1,98 @@
+[
+    {
+        "mnemonic": [
+            "zebra",
+            "little",
+            "month",
+            "vote",
+            "door",
+            "twist",
+            "kidney",
+            "join",
+            "bullet",
+            "gauge",
+            "announce",
+            "throw",
+            "pretty",
+            "educate",
+            "motor"
+        ],
+        "secret": "3ef4ba80bb03619185aff971cb0986b027e27a16",
+        "amount": "10145519253",
+        "pkh": "tz1KxuxXF1xu2dH7pkPQaJrUoBbLn8SsijWG",
+        "password": "gDofI3jqRH",
+        "email": "iegocthb.jrwbsjfc@tezos.example.org"
+    },
+    {
+        "mnemonic": [
+            "plate",
+            "siren",
+            "upon",
+            "badge",
+            "country",
+            "bamboo",
+            "feature",
+            "cheese",
+            "acoustic",
+            "lawn",
+            "under",
+            "advice",
+            "catch",
+            "arrow",
+            "motor"
+        ],
+        "secret": "12de65e7d425305f0cff484af89a0c4b96ced48f",
+        "amount": "64769882387",
+        "pkh": "tz1SobXCTNgZvX6JBgdXnC5yz4J7zXqfFF4C",
+        "password": "RKzcx0S0a3",
+        "email": "kupudiha.kipzlnod@tezos.example.org"
+    },
+    {
+        "mnemonic": [
+            "spin",
+            "sun",
+            "oval",
+            "crazy",
+            "off",
+            "kind",
+            "embody",
+            "scorpion",
+            "grid",
+            "bench",
+            "junior",
+            "expect",
+            "chat",
+            "term",
+            "you"
+        ],
+        "secret": "4afb39a37dc52eb8d25e994570c4404e2b986206",
+        "amount": "4513220467",
+        "pkh": "tz1i974WAADaVHE1P7k9q9pPKA1cq4fdNJTg",
+        "password": "kBxQ8TWnEA",
+        "email": "cqeuuewo.tbgtwnaw@tezos.example.org"
+    },
+    {
+        "mnemonic": [
+            "purse",
+            "erupt",
+            "viable",
+            "stereo",
+            "eternal",
+            "two",
+            "announce",
+            "excess",
+            "today",
+            "skill",
+            "museum",
+            "luggage",
+            "lesson",
+            "foam",
+            "rice"
+        ],
+        "secret": "0a3537c78214f204d775ab3c36012b4a37fbff7b",
+        "amount": "20691896803",
+        "pkh": "tz1UUchsqcUqZR2TLuKne277gKtAgYwE8Qap",
+        "password": "veUZ47nB0x",
+        "email": "opjmqowp.iyagnikk@tezos.example.org"
+    }
+]

@@ -4,7 +4,7 @@ import { ReactComponent as PictoGithub } from "../svg/Octicons-mark-github.svg";
 import { ReactComponent as PictoTZ } from "../svg/tz-bold.svg";
 import { REPO_URL } from "../config";
 
-function Header(props: any) {
+function Header() {
     return (
         <Box>
             <Flex>
@@ -18,7 +18,7 @@ function Header(props: any) {
                     <PictoGithub width="30" height="30" />
                 </Link>
             </Flex>
-            <Divider />
+            <Divider mb={0} />
         </Box>
     );
 }

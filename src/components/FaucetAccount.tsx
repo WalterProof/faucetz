@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { Box, Spinner, jsx } from "theme-ui";
+import { Box, Flex, Spinner, jsx } from "theme-ui";
 import DisplayAmount from "./DisplayAmount";
 
 function FaucetAccount(props: any) {
@@ -8,15 +8,21 @@ function FaucetAccount(props: any) {
     return isLoading ? (
         <Spinner />
     ) : (
-        <Box my={2}>
-            <ul>
-                <li>{node}</li>
-                <li>{pkh}</li>
-                <li>
-                    <DisplayAmount amount={balance} />
-                </li>
-            </ul>
-        </Box>
+        <Flex
+            mb={2}
+            px={2}
+            sx={{
+                alignContent: "center",
+                justifyContent: "space-between",
+                backgroundColor: "secondary"
+            }}
+        >
+            <Box>{node}</Box>
+            <Box>{pkh}</Box>
+            <Box>
+                <DisplayAmount amount={balance} />
+            </Box>
+        </Flex>
     );
 }
 

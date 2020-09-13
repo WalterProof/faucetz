@@ -54,7 +54,7 @@ function App() {
         return () => {
             setBalanceRefresh(false);
         };
-    }, [amount, toAddress, transferRequested]);
+    }, [amount, balanceRefresh, toAddress, transferRequested]);
 
     return (
         <Container p={1}>

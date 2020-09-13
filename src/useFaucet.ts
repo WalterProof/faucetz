@@ -2,24 +2,38 @@ import {useEffect, useState} from "react";
 import {Tezos} from "@taquito/taquito";
 import {InMemorySigner} from "@taquito/signer";
 import BigNumber from "bignumber.js";
-import {FAUCETS} from "./config";
+import FAUCETS from "./faucets.json";
+
+type FaucetAccounts = Array<FaucetAccount>;
+type FaucetAccount = {
+    mnemonic: Array<string>;
+    password: string;
+    email: string;
+    secret: string;
+};
+
+function pickRandomFaucet(faucets: FaucetAccounts): FaucetAccount {
+    console.log("RAND : :::::::::::::", (faucets.length * Math.random()) << 0);
+    return faucets[(faucets.length * Math.random()) << 0];
+}
+
+const faucet = pickRandomFaucet(FAUCETS);
+const {email, mnemonic, password, secret} = faucet;
+
+const signer = InMemorySigner.fromFundraiser(
+    email,
+    password,
+    mnemonic.join(" ")
+);
 
 function useFaucet(rpc: string, balanceRefresh: boolean) {
-    const faucet = FAUCETS[rpc];
-    const {email, password, mnemonic, secret} = faucet;
-
-    const signer = InMemorySigner.fromFundraiser(
-        email,
-        password,
-        mnemonic.join(" ")
-    );
-    Tezos.setProvider({rpc, signer});
-    const [isLoading, setIsLoading] = useState(true);
-    const [pkh, setPKH] = useState("");
     const [balance, setBalance] = useState("");
+    const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState("");
+    const [pkh, setPKH] = useState("");
 
     useEffect(() => {
+        Tezos.setProvider({rpc, signer});
         async function initialize() {
             setIsLoading(true);
             try {
@@ -42,7 +56,7 @@ function useFaucet(rpc: string, balanceRefresh: boolean) {
             setIsLoading(false);
         }
         initialize();
-    }, [balanceRefresh, secret]);
+    }, [balanceRefresh, rpc]);
 
     return {isLoading, pkh, balance, error};
 }
