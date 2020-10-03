@@ -1,26 +1,34 @@
 /** @jsx jsx */
-import { Box, Divider, Flex, Heading, Link, jsx } from "theme-ui";
-import { ReactComponent as PictoGithub } from "../svg/Octicons-mark-github.svg";
+import { Link as RouterLink } from "react-router-dom";
+import { Container, Box, Flex, Heading, jsx } from "theme-ui";
 import { ReactComponent as PictoTZ } from "../svg/tz-bold.svg";
-import { REPO_URL } from "../config";
+import NetworkSelector from "./NetworkSelector";
 
 function Header() {
-    return (
-        <Box>
-            <Flex>
-                <Heading as="h1">Fauce</Heading>
-                <PictoTZ />
-                <Link
-                    href={REPO_URL}
-                    sx={{ alignSelf: "center", marginLeft: "auto" }}
-                    target="new"
-                >
-                    <PictoGithub width="30" height="30" />
-                </Link>
-            </Flex>
-            <Divider mb={0} />
-        </Box>
-    );
+  return (
+    <Box>
+      <NetworkSelector />
+      <Container>
+        <Flex>
+          <Flex>
+            <Heading as="h1">Fauce</Heading>
+            <PictoTZ />
+          </Flex>
+          <Flex as="nav" sx={{ alignItems: "center", marginLeft: "auto" }}>
+            <RouterLink to="/" sx={{ variant: "styles.navlink" }}>
+              Faucet
+            </RouterLink>
+            <RouterLink
+              to="/account-generator"
+              sx={{ variant: "styles.navlink", marginLeft: 3 }}
+            >
+              Account Generator
+            </RouterLink>
+          </Flex>
+        </Flex>
+      </Container>
+    </Box>
+  );
 }
 
 export default Header;
