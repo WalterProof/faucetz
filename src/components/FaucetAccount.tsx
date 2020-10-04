@@ -1,30 +1,14 @@
-/** @jsx jsx */
-import { Box, Flex, Spinner, jsx } from "theme-ui";
+import React from "react";
 import DisplayAmount from "./DisplayAmount";
 
-function FaucetAccount(props: any) {
-  const { balance, isLoading, pkh, node } = props;
+export default function FaucetAccount(props: any) {
+  const { balance, pkh } = props;
 
-  return isLoading ? (
-    <Spinner />
-  ) : (
-    <Flex
-      mb={2}
-      px={2}
-      sx={{
-        flexDirection: ["column", "row"],
-        alignContent: "center",
-        justifyContent: "space-between",
-        backgroundColor: "secondary",
-      }}
-    >
-      <Box>{node}</Box>
-      <Box>{pkh}</Box>
-      <Box>
-        <DisplayAmount amount={balance} />
-      </Box>
-    </Flex>
+  return (
+    <div className="f-FaucetAccount">
+      <div>
+        {pkh} <DisplayAmount amount={balance} />
+      </div>
+    </div>
   );
 }
-
-export default FaucetAccount;

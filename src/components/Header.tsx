@@ -1,34 +1,12 @@
-/** @jsx jsx */
-import { Link as RouterLink } from "react-router-dom";
-import { Container, Box, Flex, Heading, jsx } from "theme-ui";
-import { ReactComponent as PictoTZ } from "../svg/tz-bold.svg";
+import React from "react";
+import Navbar from "./NavBar";
 import NetworkSelector from "./NetworkSelector";
 
-function Header() {
+export default function Header() {
   return (
-    <Box>
+    <header>
+      <Navbar />
       <NetworkSelector />
-      <Container>
-        <Flex>
-          <Flex>
-            <Heading as="h1">Fauce</Heading>
-            <PictoTZ />
-          </Flex>
-          <Flex as="nav" sx={{ alignItems: "center", marginLeft: "auto" }}>
-            <RouterLink to="/" sx={{ variant: "styles.navlink" }}>
-              Faucet
-            </RouterLink>
-            <RouterLink
-              to="/account-generator"
-              sx={{ variant: "styles.navlink", marginLeft: 3 }}
-            >
-              Account Generator
-            </RouterLink>
-          </Flex>
-        </Flex>
-      </Container>
-    </Box>
+    </header>
   );
 }
-
-export default Header;

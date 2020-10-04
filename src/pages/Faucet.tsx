@@ -1,22 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { validateAddress, ValidationResult } from "@taquito/utils";
 import { Tezos } from "@taquito/taquito";
-import {
-  Alert,
-  Box,
-  Button,
-  Field,
-  Flex,
-  Label,
-  Slider,
-  Spinner,
-} from "theme-ui";
 import { NetworkContext } from "../Context";
-import DisplayAmount from "../components/DisplayAmount";
 import FaucetAccount from "../components/FaucetAccount";
 import useFaucet from "../hooks/useFaucet";
 
-function Faucet() {
+export default function Faucet() {
   const { network } = useContext(NetworkContext);
   const { isLoading, pkh, balance, error } = useFaucet(network, true);
   const [toAddress, setToAddress] = useState("");
@@ -59,13 +48,12 @@ function Faucet() {
   }, [amount, balanceRefresh, toAddress, transferRequested]);
 
   return isLoading ? (
-    <Spinner />
+    <span className="spinner"></span>
   ) : (
-    <Flex sx={{ flexDirection: "column" }}>
+    <div>
       <FaucetAccount balance={balance} pkh={pkh} />
-      {alertMsg && <Alert my={2}>{alertMsg}</Alert>}
-      <Box
-        as="form"
+      {alertMsg && <p>{alertMsg}</p>}
+      <form
         onSubmit={(e) => {
           e.preventDefault();
           if (validateAddress(toAddress) !== ValidationResult.VALID) {
@@ -76,32 +64,36 @@ function Faucet() {
           }
         }}
       >
-        <Flex sx={{ justifyContent: "space-between" }}>
-          <Label htmlFor="amount" sx={{ width: "auto" }}>
-            Amount
-          </Label>
-          <DisplayAmount amount={amount} />
-        </Flex>
-        <Slider
-          id="amount"
-          defaultValue={amount}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setAmount(parseInt(e.target.value))
-          }
-        />
-        <Field
-          label="To Address"
-          name="toAddress"
-          placeholder="tz1xxx1234"
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setToAddress(e.target.value)
-          }
-        />
-
-        <Button>Submit</Button>
-      </Box>
-    </Flex>
+        <div>
+          <label className="block">
+            <span className="text-gray-700">Amount:</span>
+            <input
+              className="form-input mt-1 block w-full"
+              id="amount"
+              defaultValue={amount}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setAmount(parseInt(e.target.value))
+              }
+            />
+          </label>
+        </div>
+        <div>
+          <label className="block">
+            <span className="text-gray-700">Destination address:</span>
+            <input
+              className="form-input mt-1 block w-full"
+              name="toAddress"
+              placeholder="tz1xxx1234"
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setToAddress(e.target.value)
+              }
+            />
+          </label>
+        </div>
+        <div className="f-Form_submit">
+          <button>Submit</button>
+        </div>
+      </form>
+    </div>
   );
 }
-
-export default Faucet;

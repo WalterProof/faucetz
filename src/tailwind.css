@@ -1,0 +1,161 @@
+@tailwind base;
+
+/* Sticky footer */
+#root {
+  @apply flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.g-MainContent {
+  @apply flex-grow;
+}
+
+body {
+}
+
+/* Footer */
+footer {
+}
+.g-Footer {
+  @apply flex;
+  @apply p-4;
+}
+.g-Footer a {
+  margin-left: auto;
+}
+
+/* Header */
+header {
+  @apply flex;
+  @apply border-b;
+}
+
+/* Menu */
+.g-Menu {
+  @apply flex;
+  @apply items-end;
+}
+
+.g-Menu li {
+  @apply mr-1;
+}
+.g-Menu .is-active {
+  @apply -mb-px;
+  @apply z-10;
+}
+
+.g-Menu a {
+  @apply bg-white;
+  @apply inline-block;
+  @apply py-2;
+  @apply px-4;
+  @apply text-blue-500;
+  @apply font-semibold;
+}
+.g-Menu a:hover {
+  @apply text-blue-800;
+}
+
+.g-Menu .is-active a {
+  @apply bg-white;
+  @apply border-l;
+  @apply border-t;
+  @apply border-r;
+  @apply rounded-t;
+  @apply text-blue-700;
+}
+
+/* Network selector */
+.g-NetworkSelector {
+  @apply p-2;
+  @apply pr-0;
+  @apply ml-auto;
+}
+.g-NetworkSelector > div {
+  @apply flex;
+  @apply items-center;
+  @apply justify-end;
+}
+.g-NetworkSelector span {
+  @apply pr-4;
+  @apply text-sm;
+}
+
+/* Display tez amount */
+.g-DisplayTez {
+  @apply inline;
+}
+
+.g-DisplayTez span,
+.g-DisplayTez svg {
+  @apply inline-block;
+}
+.g-DisplayTez svg {
+  @apply object-scale-down;
+  @apply h-4;
+  @apply w-4;
+}
+
+/* Spinner */
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner:before {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin-top: -10px;
+  margin-left: -10px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  border-top-color: #000;
+  animation: spinner 0.6s linear infinite;
+}
+
+/* Button */
+button {
+  @apply bg-white;
+  @apply text-gray-800;
+  @apply font-semibold;
+  @apply py-2;
+  @apply px-4;
+  @apply border;
+  @apply border-gray-400;
+  @apply rounded;
+  @apply shadow;
+}
+
+button:hover {
+  @apply bg-gray-100;
+}
+
+/* Faucet account */
+.f-FaucetAccount {
+  @apply flex;
+  @apply pt-2;
+}
+.f-FaucetAccount div {
+  @apply ml-auto;
+}
+
+/* Faucet */
+.f-Form_submit {
+  @apply flex;
+  @apply pt-2;
+}
+
+.f-Form_submit button {
+  @apply ml-auto;
+}
+
+@tailwind components;
+
+@tailwind utilities;

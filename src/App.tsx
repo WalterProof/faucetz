@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import { Box, Container } from "theme-ui";
 import { NetworkContext } from "./Context";
 import { DEFAULT_NETWORK } from "./config";
 import Footer from "./components/Footer";
@@ -13,30 +12,22 @@ function App() {
 
   return (
     <NetworkContext.Provider value={{ network, setNetwork }}>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          minHeight: "100vh",
-        }}
-      >
+      <div className="g-MainContent container">
         <BrowserRouter>
           <Header />
-          <Container sx={{ flex: 1 }}>
-            <main>
-              <Switch>
-                <Route exact path="/">
-                  <Faucet />
-                </Route>
-                <Route path="/account-generator">
-                  <AccountGenerator />
-                </Route>
-              </Switch>
-            </main>
-          </Container>
+          <main>
+            <Switch>
+              <Route exact path="/">
+                <Faucet />
+              </Route>
+              <Route path="/account-generator">
+                <AccountGenerator />
+              </Route>
+            </Switch>
+          </main>
         </BrowserRouter>
-        <Footer />
-      </Box>
+      </div>
+      <Footer />
     </NetworkContext.Provider>
   );
 }

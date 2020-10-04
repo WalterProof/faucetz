@@ -1,7 +1,5 @@
 import React from "react";
 
-function AccountGenerator() {
+export default function AccountGenerator() {
   return <p>TODO</p>;
 }
-
-export default AccountGenerator;

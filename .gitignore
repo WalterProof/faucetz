@@ -9,6 +9,9 @@
 .firebase
 .firebaserc
 
+# tailwind
+src/tailwind.output.css
+
 # testing
 /coverage
 
