@@ -28,7 +28,14 @@ footer {
 /* Header */
 header {
   @apply flex;
+  @apply flex-col-reverse;
   @apply border-b;
+}
+
+@media (min-width: 768px) {
+  header {
+    @apply flex-row;
+  }
 }
 
 /* Menu */
@@ -135,6 +142,36 @@ button {
 
 button:hover {
   @apply bg-gray-100;
+}
+
+/* Messages */
+.g-Message_warn {
+  @apply bg-orange-100;
+  @apply border-l-4;
+  @apply border-orange-500;
+  @apply text-orange-700;
+  @apply p-4;
+}
+
+.g-Message_warn p:first-child {
+  @apply font-bold;
+}
+
+.g-Message_info {
+  @apply flex;
+  @apply items-center;
+  @apply bg-blue-500;
+  @apply text-white;
+  @apply text-sm;
+  @apply font-bold;
+  @apply px-4;
+  @apply py-3;
+}
+.g-Message_info svg {
+  @apply fill-current;
+  @apply w-4;
+  @apply h-4;
+  @apply mr-2;
 }
 
 /* Faucet account */
