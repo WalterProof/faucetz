@@ -145,6 +145,25 @@ button:hover {
 }
 
 /* Messages */
+.g-Message_panic div:first-child {
+  @apply bg-red-500;
+  @apply text-white;
+  @apply font-bold;
+  @apply rounded-t;
+  @apply px-4;
+  @apply py-2;
+}
+
+.g-Message_panic div:nth-child(1) {
+  @apply border border-t-0;
+  @apply border-red-400;
+  @apply rounded-b;
+  @apply bg-red-100;
+  @apply px-4;
+  @apply py-3;
+  @apply text-red-700;
+}
+
 .g-Message_warn {
   @apply bg-orange-100;
   @apply border-l-4;
@@ -181,6 +200,12 @@ button:hover {
 }
 .f-FaucetAccount div {
   @apply ml-auto;
+}
+
+/* Forms */
+.g-FormError {
+    @apply text-red-500;
+    @apply italic;
 }
 
 /* Faucet */

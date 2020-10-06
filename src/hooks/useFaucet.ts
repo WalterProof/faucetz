@@ -1,63 +1,73 @@
-import { useEffect, useState } from "react";
-import { Tezos } from "@taquito/taquito";
-import { InMemorySigner } from "@taquito/signer";
+import {useEffect, useState} from "react";
+import {Tezos} from "@taquito/taquito";
+import {InMemorySigner} from "@taquito/signer";
 import BigNumber from "bignumber.js";
 import FAUCETS from "../faucets.json";
-import { NODES } from "../config";
+import {NODES} from "../config";
 
 type FaucetAccounts = Array<FaucetAccount>;
 type FaucetAccount = {
-  mnemonic: Array<string>;
-  password: string;
-  email: string;
-  secret: string;
+    mnemonic: Array<string>;
+    password: string;
+    email: string;
+    secret: string;
 };
 
 function pickRandomFaucet(faucets: FaucetAccounts): FaucetAccount {
-  return faucets[(faucets.length * Math.random()) << 0];
+    return faucets[(faucets.length * Math.random()) << 0];
 }
 
 const faucet = pickRandomFaucet(FAUCETS);
-const { email, mnemonic, password, secret } = faucet;
+const {email, mnemonic, password, secret} = faucet;
 
 const signer = InMemorySigner.fromFundraiser(
-  email,
-  password,
-  mnemonic.join(" ")
+    email,
+    password,
+    mnemonic.join(" ")
 );
 
-function useFaucet(network: string, balanceRefresh: boolean) {
-  const rpc = NODES[network];
-  const [balance, setBalance] = useState("");
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState("");
-  const [pkh, setPKH] = useState("");
+const useFaucet = (network: string, balanceRefresh: boolean) => {
+    const rpc = NODES[network];
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState("");
+    const [pkh, setPKH] = useState("");
+    const [balance, setBalance] = useState("");
 
-  useEffect(() => {
-    Tezos.setProvider({ rpc, signer });
-    async function initialize() {
-      setIsLoading(true);
-      try {
-        const pkh = await Tezos.signer.publicKeyHash();
-        setPKH(pkh);
+    useEffect(() => {
+        let ignore = false;
+        const initialize = async () => {
+            try {
+                setLoading(true);
+                setError("");
 
-        const balance = await Tezos.tz.getBalance(pkh);
-        setBalance(
-          `${new BigNumber(Tezos.format("mutez", "tz", balance)).toFixed(2)}`
-        );
+                Tezos.setProvider({rpc, signer});
+                const pkh = await Tezos.signer.publicKeyHash();
+                if (!ignore) setPKH(pkh);
 
-        if (balance.isZero()) {
-          await Tezos.tz.activate(pkh, secret);
-        }
-      } catch (e) {
-        setError(e.message);
-      }
-      setIsLoading(false);
-    }
-    initialize();
-  }, [balanceRefresh, rpc]);
+                const balance = await Tezos.tz.getBalance(pkh);
+                if (!ignore)
+                    setBalance(
+                        `${new BigNumber(
+                            Tezos.format("mutez", "tz", balance)
+                        ).toFixed(2)}`
+                    );
 
-  return { isLoading, pkh, balance, error };
-}
+                if (!ignore && balance.isZero()) {
+                    await Tezos.tz.activate(pkh, secret);
+                }
+            } catch (err) {
+                setError(err);
+            } finally {
+                setLoading(false);
+            }
+        };
+        initialize();
+        return () => {
+            ignore = true;
+        };
+    }, [rpc, balanceRefresh]);
+
+    return {loading, pkh, balance, error};
+};
 
 export default useFaucet;

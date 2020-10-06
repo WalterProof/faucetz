@@ -4,7 +4,7 @@
 
 Testnet faucet for the Tezos blockchain
 
-Features: 
+Features:
 
 - uses one faucet taken from https://faucet.tzalpha.net/
 - enter amount of tez and address to get some funds
@@ -18,3 +18,9 @@ For alternatives testnet faucets, see:
 
 - https://dex.camlcase.io/
 - https://tacowallet.dev/home
+
+## Resources
+
+https://dev.to/aryclenio/configuring-a-reactjs-typescript-project-with-editorconfig-eslint-e-prettier-495n
+https://fettblog.eu/typescript-react/
+

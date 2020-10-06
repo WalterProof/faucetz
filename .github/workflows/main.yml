@@ -16,7 +16,7 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v2
       - name: Install Dependencies
-        run: yarn install
+        run: yarn install --prod
       - name: Test
         run: yarn run test
       - name: Build
