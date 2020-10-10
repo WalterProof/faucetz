@@ -219,6 +219,30 @@ button:hover {
     @apply ml-auto;
 }
 
+/* AccountGenerator */
+.ag-Keys {
+    @apply flex;
+    @apply flex-row;
+    @apply flex-wrap;
+    @apply mb-4;
+}
+
+.ag-Keys dt {
+    flex-basis: 20%;
+    @apply text-right;
+    @apply px-2;
+}
+
+.ag-Keys dt:after {
+    content: ":";
+}
+
+.ag-Keys dd {
+    flex-basis: 70%;
+    @apply flex-grow;
+    @apply break-all;
+}
+
 @tailwind components;
 
 @tailwind utilities;

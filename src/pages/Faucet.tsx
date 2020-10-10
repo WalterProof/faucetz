@@ -8,7 +8,7 @@ import FaucetAccount from "../components/FaucetAccount";
 import useFaucet from "../hooks/useFaucet";
 import { Panic, Info } from "../components/Messages";
 
-export default function Faucet() {
+const Faucet = () => {
     const { network } = useContext(NetworkContext);
     const [panic, setPanic] = useState("");
     const [balanceRefresh, setBalanceRefresh] = useState(false);
@@ -16,7 +16,7 @@ export default function Faucet() {
         loading: faucetIsLoading,
         pkh: faucetPKH,
         balance: faucetBalance,
-        error: faucetError
+        error: faucetError,
     } = useFaucet(network, balanceRefresh);
     const [info, setInfo] = useState("");
 
@@ -60,7 +60,7 @@ export default function Faucet() {
                                     defaultValue={25}
                                     name="amount"
                                     ref={register({
-                                        validate: value => value > 0
+                                        validate: (value) => value > 0,
                                     })}
                                     type="number"
                                 />
@@ -80,9 +80,9 @@ export default function Faucet() {
                                     className="block w-full mt-1 form-input"
                                     aria-invalid={errors.to ? "true" : "false"}
                                     ref={register({
-                                        validate: value =>
+                                        validate: (value) =>
                                             validateAddress(value) ===
-                                            ValidationResult.VALID
+                                            ValidationResult.VALID,
                                     })}
                                     name="to"
                                     placeholder="tz1xxx1234"
@@ -103,4 +103,6 @@ export default function Faucet() {
             )}
         </div>
     );
-}
+};
+
+export default Faucet;

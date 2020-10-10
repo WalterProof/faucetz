@@ -22,5 +22,6 @@ For alternatives testnet faucets, see:
 ## Resources
 
 https://dev.to/aryclenio/configuring-a-reactjs-typescript-project-with-editorconfig-eslint-e-prettier-495n
+
 https://fettblog.eu/typescript-react/
 

@@ -1,14 +1,17 @@
 import React from "react";
 import DisplayAmount from "./DisplayAmount";
+import { shortenAddress } from "../Tezos";
 
-export default function FaucetAccount(props: any) {
+const FaucetAccount = (props: any) => {
     const { balance, pkh } = props;
 
     return (
         <div className="f-FaucetAccount">
             <div>
-                {pkh} <DisplayAmount amount={balance} />
+                {shortenAddress(pkh)} <DisplayAmount amount={balance} />
             </div>
         </div>
     );
-}
+};
+
+export default FaucetAccount;

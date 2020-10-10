@@ -13,9 +13,9 @@ type FaucetAccount = {
     secret: string;
 };
 
-function pickRandomFaucet(faucets: FaucetAccounts): FaucetAccount {
+const pickRandomFaucet = (faucets: FaucetAccounts): FaucetAccount => {
     return faucets[(faucets.length * Math.random()) << 0];
-}
+};
 
 const faucet = pickRandomFaucet(FAUCETS);
 const {email, mnemonic, password, secret} = faucet;
