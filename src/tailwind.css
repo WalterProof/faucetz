@@ -235,7 +235,6 @@ header {
 
 .ag-Stored div {
     @apply flex;
-    @apply mb-2;
 }
 
 .ag-Stored_selected button {
@@ -243,31 +242,61 @@ header {
 }
 
 .ag-Account {
+    @apply text-sm;
     @apply flex;
-    @apply flex-row;
+    @apply flex-col;
     @apply flex-wrap;
     @apply mb-4;
 }
 
+.ag-Account dt,
+.ag-Account dd {
+    @apply p-2;
+}
+
 .ag-Account dt {
-    flex-basis: 20%;
-    @apply text-right;
-    @apply px-2;
+    @apply bg-gray-100;
+}
+
+.ag-Account dd {
+    @apply bg-gray-300;
+}
+
+@media (min-width: 768px) {
+    .ag-Account {
+        @apply flex;
+        @apply flex-row;
+    }
+    .ag-Account dt {
+        flex-basis: 20%;
+        @apply text-right;
+        @apply border-b-2;
+    }
+    .ag-Account dd {
+        flex-basis: 70%;
+        @apply flex-grow;
+        @apply border-b-2;
+        @apply border-l-2;
+        @apply border-gray-100;
+    }
 }
 
 .ag-Account dt:after {
     content: ":";
 }
 
-.ag-Account dd {
-    flex-basis: 70%;
-    @apply flex-grow;
-}
 .ag-Account dd:nth-child(4n) {
     @apply break-all;
 }
 
-.ag-Stored {
+.ag-Stored > div {
+    @apply flex;
+}
+
+.ag-Stored ul {
+    @apply order-last;
+    @apply text-xs;
+    @apply ml-2;
 }
 
 @tailwind components;
