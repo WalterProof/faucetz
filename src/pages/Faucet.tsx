@@ -96,7 +96,7 @@ const Faucet = () => {
                             </label>
                         </div>
                         <div className="f-Form_submit">
-                            <button>Submit</button>
+                            <button className="btn">Submit</button>
                         </div>
                     </form>
                 </div>

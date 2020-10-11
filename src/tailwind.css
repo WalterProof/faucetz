@@ -129,7 +129,7 @@ header {
 }
 
 /* Button */
-button {
+.btn {
     @apply bg-white;
     @apply text-gray-800;
     @apply font-semibold;
@@ -141,7 +141,7 @@ button {
     @apply shadow;
 }
 
-button:hover {
+.btn:hover {
     @apply bg-gray-100;
 }
 
@@ -155,7 +155,7 @@ button:hover {
     @apply py-2;
 }
 
-.g-Message_panic div:nth-child(2) {
+.g-Message_panic div:nth-child(2n) {
     @apply border border-t-0;
     @apply border-red-400;
     @apply rounded-b;
@@ -220,27 +220,54 @@ button:hover {
 }
 
 /* AccountGenerator */
-.ag-Keys {
+.ag h2 {
+    @apply text-gray-900;
+    @apply font-bold;
+}
+
+.ag button:not(:first-child) {
+    @apply mr-2;
+}
+
+.ag-Generated {
+    @apply mb-2;
+}
+
+.ag-Stored div {
+    @apply flex;
+    @apply mb-2;
+}
+
+.ag-Stored_selected button {
+    @apply underline;
+}
+
+.ag-Account {
     @apply flex;
     @apply flex-row;
     @apply flex-wrap;
     @apply mb-4;
 }
 
-.ag-Keys dt {
+.ag-Account dt {
     flex-basis: 20%;
     @apply text-right;
     @apply px-2;
 }
 
-.ag-Keys dt:after {
+.ag-Account dt:after {
     content: ":";
 }
 
-.ag-Keys dd {
+.ag-Account dd {
     flex-basis: 70%;
     @apply flex-grow;
+}
+.ag-Account dd:nth-child(4n) {
     @apply break-all;
+}
+
+.ag-Stored {
 }
 
 @tailwind components;
