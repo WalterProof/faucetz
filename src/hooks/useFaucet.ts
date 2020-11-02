@@ -34,7 +34,6 @@ const useFaucet = (network: string, balanceRefresh: boolean) => {
     const [balance, setBalance] = useState("");
 
     useEffect(() => {
-        let ignore = false;
         const initialize = async () => {
             try {
                 setLoading(true);
@@ -42,19 +41,16 @@ const useFaucet = (network: string, balanceRefresh: boolean) => {
 
                 Tezos.setProvider({ rpc, signer });
                 const pkh = await Tezos.signer.publicKeyHash();
-                if (!ignore) setPKH(pkh);
+                setPKH(pkh);
 
                 const balance = await Tezos.tz.getBalance(pkh);
-                if (!ignore)
-                    setBalance(
-                        `${new BigNumber(
-                            Tezos.format("mutez", "tz", balance)
-                        ).toFixed(2)}`
-                    );
+                setBalance(
+                    `${new BigNumber(
+                        Tezos.format("mutez", "tz", balance)
+                    ).toFixed(2)}`
+                );
 
-                if (!ignore && balance.isZero()) {
-                    await Tezos.tz.activate(pkh, secret);
-                }
+                if (balance.isZero()) await Tezos.tz.activate(pkh, secret);
             } catch (err) {
                 setError(err);
             } finally {
@@ -62,9 +58,6 @@ const useFaucet = (network: string, balanceRefresh: boolean) => {
             }
         };
         initialize();
-        return () => {
-            ignore = true;
-        };
     }, [rpc, balanceRefresh]);
 
     return { loading, pkh, balance, error };
