@@ -6,12 +6,14 @@ import { Tezos } from "@taquito/taquito";
 import { NetworkContext } from "../Context";
 import FaucetAccount from "../components/FaucetAccount";
 import useFaucet from "../hooks/useFaucet";
+import useTDC, { NetworkType } from "../hooks/useTDC";
 import { Panic, Info } from "../components/Messages";
 
 const Faucet = () => {
     const { network } = useContext(NetworkContext);
     const [panic, setPanic] = useState("");
     const [balanceRefresh, setBalanceRefresh] = useState(false);
+    const [tdc] = useTDC(network as NetworkType);
     const {
         loading: faucetIsLoading,
         pkh: faucetPKH,
@@ -28,6 +30,15 @@ const Faucet = () => {
 
     const transfer = async (p: TransferParams) => {
         try {
+            if (
+                tdc !== undefined &&
+                network === "delphinet" &&
+                p.to.endsWith(".delphi")
+            ) {
+                const address = await tdc.resolver.resolveNameToAddress(p.to);
+                if (address) p.to = address;
+            }
+
             const op = await Tezos.contract.transfer(p);
             setInfo(`operation ${op.hash} in progress`);
             await op.confirmation(1);
@@ -39,6 +50,10 @@ const Faucet = () => {
     };
 
     const showInfo = (message: string) => <Info>{message}</Info>;
+
+    const validateAddressInput = (value: string): boolean =>
+        validateAddress(value) === ValidationResult.VALID ||
+        (value.endsWith(".delphi") && network === "delphinet");
 
     return (
         <div>
@@ -80,9 +95,7 @@ const Faucet = () => {
                                     className="block w-full mt-1 form-input"
                                     aria-invalid={errors.to ? "true" : "false"}
                                     ref={register({
-                                        validate: (value) =>
-                                            validateAddress(value) ===
-                                            ValidationResult.VALID,
+                                        validate: validateAddressInput,
                                     })}
                                     name="to"
                                     placeholder="tz1xxx1234"

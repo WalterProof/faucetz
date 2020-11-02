@@ -1,9 +1,9 @@
-import {useEffect, useState} from "react";
-import {Tezos} from "@taquito/taquito";
-import {InMemorySigner} from "@taquito/signer";
+import { useEffect, useState } from "react";
+import { Tezos } from "@taquito/taquito";
+import { InMemorySigner } from "@taquito/signer";
 import BigNumber from "bignumber.js";
 import FAUCETS from "../faucets.json";
-import {NODES} from "../config";
+import { NODES } from "../config";
 
 type FaucetAccounts = Array<FaucetAccount>;
 type FaucetAccount = {
@@ -18,7 +18,7 @@ const pickRandomFaucet = (faucets: FaucetAccounts): FaucetAccount => {
 };
 
 const faucet = pickRandomFaucet(FAUCETS);
-const {email, mnemonic, password, secret} = faucet;
+const { email, mnemonic, password, secret } = faucet;
 
 const signer = InMemorySigner.fromFundraiser(
     email,
@@ -40,7 +40,7 @@ const useFaucet = (network: string, balanceRefresh: boolean) => {
                 setLoading(true);
                 setError("");
 
-                Tezos.setProvider({rpc, signer});
+                Tezos.setProvider({ rpc, signer });
                 const pkh = await Tezos.signer.publicKeyHash();
                 if (!ignore) setPKH(pkh);
 
@@ -67,7 +67,7 @@ const useFaucet = (network: string, balanceRefresh: boolean) => {
         };
     }, [rpc, balanceRefresh]);
 
-    return {loading, pkh, balance, error};
+    return { loading, pkh, balance, error };
 };
 
 export default useFaucet;
