@@ -26,7 +26,7 @@ const signer = InMemorySigner.fromFundraiser(
     mnemonic.join(" ")
 );
 
-const useFaucet = (network: string, balanceRefresh: boolean) => {
+const useFaucet = (network: string, balanceRefresh: number) => {
     const rpc = NODES[network];
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");

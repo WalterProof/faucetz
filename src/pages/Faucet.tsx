@@ -12,7 +12,7 @@ import { Panic, Info } from "../components/Messages";
 const Faucet = () => {
     const { network } = useContext(NetworkContext);
     const [panic, setPanic] = useState("");
-    const [balanceRefresh, setBalanceRefresh] = useState(false);
+    const [balanceRefresh, setBalanceRefresh] = useState(0);
     const [tdc] = useTDC(network as NetworkType);
     const {
         loading: faucetIsLoading,
@@ -43,7 +43,7 @@ const Faucet = () => {
             setInfo(`operation ${op.hash} in progress`);
             await op.confirmation(1);
             setInfo(`operation ${op.hash} confirmed`);
-            setBalanceRefresh(true);
+            setBalanceRefresh(balanceRefresh + 1);
         } catch (e) {
             setPanic(`oops something bad happened: ${JSON.stringify(e)}`);
         }

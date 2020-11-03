@@ -6,22 +6,21 @@ Testnet faucet for the Tezos blockchain
 
 Features:
 
-- uses one faucet taken from https://faucet.tzalpha.net/
-- enter amount of tez and address to get some funds
+-   uses one faucet taken from https://faucet.tzalpha.net/
+-   sends tez to given address or tezos domain (delphi)
+-   generates accounts and persists them in local storage
 
 Roadmap:
 
-- connect wallet
-- register map of address with names, history, with quick links to explorers (centralised persistence or local storage)
+-   connect wallet
+-   local infra
 
 For alternatives testnet faucets, see:
 
-- https://dex.camlcase.io/
-- https://tacowallet.dev/home
+-   https://tacowallet.dev/home
 
 ## Resources
 
 https://dev.to/aryclenio/configuring-a-reactjs-typescript-project-with-editorconfig-eslint-e-prettier-495n
 
 https://fettblog.eu/typescript-react/
-
