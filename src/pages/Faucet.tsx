@@ -89,7 +89,11 @@ const Faucet = () => {
                         <div>
                             <label className="block">
                                 <span className="text-gray-700">
-                                    Destination address:
+                                    Destination address
+                                    {network === "delphinet"
+                                        ? " (or .delphi domain name)"
+                                        : ""}
+                                    :
                                 </span>
                                 <input
                                     className="block w-full mt-1 form-input"

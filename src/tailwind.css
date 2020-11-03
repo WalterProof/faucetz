@@ -156,7 +156,8 @@ header {
 }
 
 .g-Message_panic div:nth-child(2n) {
-    @apply border border-t-0;
+    @apply border;
+    @apply border-t-0;
     @apply border-red-400;
     @apply rounded-b;
     @apply bg-red-100;
@@ -199,8 +200,15 @@ header {
     @apply flex;
     @apply pt-2;
 }
+
 .f-FaucetAccount div {
     @apply ml-auto;
+}
+
+.f-FaucetAccount_explorer-link {
+    @apply py-1;
+    @apply px-2;
+    @apply ml-1;
 }
 
 /* Forms */

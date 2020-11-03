@@ -4,7 +4,7 @@ import { TezosToolkit } from "@taquito/taquito";
 import { useEffect } from "react";
 import { NODES } from "../config";
 
-export type NetworkType = "carthagenet" | "delphinet" | undefined;
+export type NetworkType = "carthagenet" | "delphinet" | "dalphanet" | undefined;
 
 const useTDC = (network: NetworkType) => {
     const [client, setClient] = useState<TezosDomainsClient | undefined>(
@@ -12,7 +12,7 @@ const useTDC = (network: NetworkType) => {
     );
 
     useEffect(() => {
-        if (network === undefined) return;
+        if (network === undefined || network === "dalphanet") return;
         const rpc = NODES[network];
         const tezos = new TezosToolkit();
         tezos.setProvider({ rpc });
