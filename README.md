@@ -14,6 +14,7 @@ Roadmap:
 
 -   connect wallet
 -   local infra
+-   add FA 1.2 and FA 2 tokens
 
 For alternatives testnet faucets, see:
 
