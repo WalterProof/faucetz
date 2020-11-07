@@ -1,19 +1,23 @@
 import React, { useContext } from "react";
-import { NetworkContext } from "../Context";
+import { TezosContext } from "../Context";
 import { NODES } from "../config";
+import Tezos from "../Tezos";
 
 const NetworkSelector = () => {
-    const { network } = useContext(NetworkContext);
+    const { network } = useContext(TezosContext);
 
     return (
         <div className="g-NetworkSelector">
             <div>
                 <span>{NODES[network]}</span>
-                <NetworkContext.Consumer>
-                    {({ network, setNetwork }) => (
+                <TezosContext.Consumer>
+                    {({ tezos, setTezos, network, setNetwork }) => (
                         <select
                             defaultValue={network}
-                            onChange={(e) => setNetwork(e.target.value)}
+                            onChange={(e) => {
+                                setNetwork(e.target.value);
+                                setTezos(Tezos(NODES[e.target.value]));
+                            }}
                             className="form-select"
                         >
                             {Object.keys(NODES).map((network, i) => (
@@ -23,7 +27,7 @@ const NetworkSelector = () => {
                             ))}
                         </select>
                     )}
-                </NetworkContext.Consumer>
+                </TezosContext.Consumer>
             </div>
         </div>
     );

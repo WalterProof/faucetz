@@ -1,12 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TezosDomainsClient } from "@tezos-domains/client";
 import { TezosToolkit } from "@taquito/taquito";
-import { useEffect } from "react";
 import { NODES } from "../config";
+import { TezosWrapper } from "../Tezos";
 
 export type NetworkType = "carthagenet" | "delphinet" | "dalphanet" | undefined;
 
-const useTDC = (network: NetworkType) => {
+const useTezosDomains = (tezos: TezosWrapper, network: NetworkType) => {
     const [client, setClient] = useState<TezosDomainsClient | undefined>(
         undefined
     );
@@ -22,4 +22,4 @@ const useTDC = (network: NetworkType) => {
     return [client];
 };
 
-export default useTDC;
+export default useTezosDomains;

@@ -2,24 +2,23 @@ import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { validateAddress, ValidationResult } from "@taquito/utils";
 import { TransferParams } from "@taquito/taquito/dist/types/operations/types";
-import { Tezos } from "@taquito/taquito";
-import { NetworkContext } from "../Context";
+import { TezosContext } from "../Context";
 import FaucetAccount from "../components/FaucetAccount";
 import useFaucet from "../hooks/useFaucet";
-import useTDC, { NetworkType } from "../hooks/useTDC";
+import useTezosDomains, { NetworkType } from "../hooks/useTezosDomains";
 import { Panic, Info } from "../components/Messages";
 
 const Faucet = () => {
-    const { network } = useContext(NetworkContext);
+    const { tezos, network } = useContext(TezosContext);
     const [panic, setPanic] = useState("");
     const [balanceRefresh, setBalanceRefresh] = useState(0);
-    const [tdc] = useTDC(network as NetworkType);
+    const [tezosDomainsClient] = useTezosDomains(tezos, network as NetworkType);
     const {
         loading: faucetIsLoading,
         pkh: faucetPKH,
         balance: faucetBalance,
         error: faucetError,
-    } = useFaucet(network, balanceRefresh);
+    } = useFaucet(tezos.getTK(), balanceRefresh);
     const [info, setInfo] = useState("");
 
     const { register, handleSubmit, errors } = useForm<TransferParams>();
@@ -31,15 +30,22 @@ const Faucet = () => {
     const transfer = async (p: TransferParams) => {
         try {
             if (
-                tdc !== undefined &&
+                tezosDomainsClient !== undefined &&
                 network === "delphinet" &&
                 p.to.endsWith(".delphi")
             ) {
-                const address = await tdc.resolver.resolveNameToAddress(p.to);
-                if (address) p.to = address;
+                setInfo(`resolving domain ${p.to}...`);
+                const address = await tezosDomainsClient.resolver.resolveNameToAddress(
+                    p.to
+                );
+                if (address) {
+                    setInfo(`address resolved: ${address}`);
+                    p.to = address;
+                }
             }
 
-            const op = await Tezos.contract.transfer(p);
+            setInfo(`preparing new operation...`);
+            const op = await tezos.transfer(p);
             setInfo(`operation ${op.hash} in progress`);
             await op.confirmation(1);
             setInfo(`operation ${op.hash} confirmed`);

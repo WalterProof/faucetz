@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import { Tezos } from "@taquito/taquito";
 import { InMemorySigner } from "@taquito/signer";
 import BigNumber from "bignumber.js";
 import FAUCETS from "../faucets.json";
-import { NODES } from "../config";
+import { TezosToolkit } from "@taquito/taquito";
 
 type FaucetAccounts = Array<FaucetAccount>;
 type FaucetAccount = {
@@ -26,8 +25,7 @@ const signer = InMemorySigner.fromFundraiser(
     mnemonic.join(" ")
 );
 
-const useFaucet = (network: string, balanceRefresh: number) => {
-    const rpc = NODES[network];
+const useFaucet = (tezos: TezosToolkit, balanceRefresh: number) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
     const [pkh, setPKH] = useState("");
@@ -39,18 +37,19 @@ const useFaucet = (network: string, balanceRefresh: number) => {
                 setLoading(true);
                 setError("");
 
-                Tezos.setProvider({ rpc, signer });
-                const pkh = await Tezos.signer.publicKeyHash();
+                tezos.setSignerProvider(signer);
+
+                const pkh = await tezos.signer.publicKeyHash();
                 setPKH(pkh);
 
-                const balance = await Tezos.tz.getBalance(pkh);
+                const balance = await tezos.tz.getBalance(pkh);
                 setBalance(
                     `${new BigNumber(
-                        Tezos.format("mutez", "tz", balance)
+                        tezos.format("mutez", "tz", balance)
                     ).toFixed(2)}`
                 );
 
-                if (balance.isZero()) await Tezos.tz.activate(pkh, secret);
+                if (balance.isZero()) await tezos.tz.activate(pkh, secret);
             } catch (err) {
                 setError(err);
             } finally {
@@ -58,7 +57,7 @@ const useFaucet = (network: string, balanceRefresh: number) => {
             }
         };
         initialize();
-    }, [rpc, balanceRefresh]);
+    }, [tezos, balanceRefresh]);
 
     return { loading, pkh, balance, error };
 };

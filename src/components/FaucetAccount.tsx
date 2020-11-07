@@ -1,18 +1,22 @@
-import React, { useContext } from "react";
+import React, { FunctionComponent } from "react";
 import DisplayAmount from "./DisplayAmount";
-import { shortenAddress, explore } from "../Tezos";
-import { NetworkContext } from "../Context";
+import { explore, shortenAddress } from "../Tezos";
 
-const FaucetAccount = (props: any) => {
-    const { balance, pkh } = props;
-    const { network } = useContext(NetworkContext);
+type FaucetAccountProps = {
+    balance: string;
+    pkh: string;
+};
 
+const FaucetAccount: FunctionComponent<FaucetAccountProps> = ({
+    balance,
+    pkh,
+}) => {
     return (
         <div className="f-FaucetAccount">
             <div>
                 {shortenAddress(pkh)} <DisplayAmount amount={balance} />
                 <a
-                    href={explore(network, pkh)}
+                    href={explore("delphinet", pkh)}
                     target="_new"
                     className="f-FaucetAccount_explorer-link btn"
                 >
