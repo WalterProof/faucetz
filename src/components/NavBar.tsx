@@ -1,8 +1,11 @@
-import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import React, { FunctionComponent } from "react";
+import { Link } from "react-router-dom";
 
-const Navbar = () => {
-    const { pathname } = useLocation();
+type NavBarProps = {
+    pathname: string;
+};
+
+const Navbar: FunctionComponent<NavBarProps> = ({ pathname }) => {
     const getNavLinkClass = (path: string) => {
         return pathname === path ? "is-active" : "";
     };

@@ -46,6 +46,7 @@ footer {
 header {
     @apply flex;
     @apply flex-col;
+    @apply my-4;
 }
 
 h1 {
@@ -58,6 +59,10 @@ h1 {
 
 h1 span {
     @apply ml-10;
+}
+
+h2 {
+    @apply py-2;
 }
 
 /* Nav */
@@ -229,7 +234,6 @@ h1 span {
 /* Faucet account */
 .f-FaucetAccount {
     @apply flex;
-    @apply my-4;
     @apply pt-2;
 }
 
