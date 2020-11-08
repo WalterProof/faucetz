@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import { TezosDomainsClient } from "@tezos-domains/client";
-import { TezosToolkit } from "@taquito/taquito";
-import { NODES } from "../config";
 import { TezosWrapper } from "../Tezos";
 
 export type NetworkType = "carthagenet" | "delphinet" | "dalphanet" | undefined;
@@ -13,11 +11,8 @@ const useTezosDomains = (tezos: TezosWrapper, network: NetworkType) => {
 
     useEffect(() => {
         if (network === undefined || network === "dalphanet") return;
-        const rpc = NODES[network];
-        const tezos = new TezosToolkit();
-        tezos.setProvider({ rpc });
-        setClient(new TezosDomainsClient({ tezos, network }));
-    }, [network]);
+        setClient(new TezosDomainsClient({ tezos: tezos.getTK(), network }));
+    }, [tezos, network]);
 
     return [client];
 };

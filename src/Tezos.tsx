@@ -24,8 +24,7 @@ export const explore = (network: string, address: string): string => {
 };
 
 const Tezos = (rpc: string): TezosWrapper => {
-    const tk = new TezosToolkit();
-    tk.setProvider({ rpc });
+    const tk = new TezosToolkit(rpc);
 
     return {
         getTK: (): TezosToolkit => tk,
