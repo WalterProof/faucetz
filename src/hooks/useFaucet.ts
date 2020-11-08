@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { InMemorySigner } from "@taquito/signer";
-import BigNumber from "bignumber.js";
 import FAUCETS from "../faucets.json";
 import { TezosToolkit } from "@taquito/taquito";
 
@@ -25,11 +24,10 @@ const signer = InMemorySigner.fromFundraiser(
     mnemonic.join(" ")
 );
 
-const useFaucet = (tezos: TezosToolkit, balanceRefresh: number) => {
+const useFaucet = (tezos: TezosToolkit) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
     const [pkh, setPKH] = useState("");
-    const [balance, setBalance] = useState("");
 
     useEffect(() => {
         const initialize = async () => {
@@ -43,12 +41,6 @@ const useFaucet = (tezos: TezosToolkit, balanceRefresh: number) => {
                 setPKH(pkh);
 
                 const balance = await tezos.tz.getBalance(pkh);
-                setBalance(
-                    `${new BigNumber(
-                        tezos.format("mutez", "tz", balance)
-                    ).toFixed(2)}`
-                );
-
                 if (balance.isZero()) await tezos.tz.activate(pkh, secret);
             } catch (err) {
                 setError(err);
@@ -57,9 +49,9 @@ const useFaucet = (tezos: TezosToolkit, balanceRefresh: number) => {
             }
         };
         initialize();
-    }, [tezos, balanceRefresh]);
+    }, [tezos]);
 
-    return { loading, pkh, balance, error };
+    return { loading, pkh, error };
 };
 
 export default useFaucet;

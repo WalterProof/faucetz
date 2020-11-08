@@ -11,14 +11,13 @@ import { Panic, Info } from "../components/Messages";
 const Faucet = () => {
     const { tezos, network } = useContext(TezosContext);
     const [panic, setPanic] = useState("");
-    const [balanceRefresh, setBalanceRefresh] = useState(0);
+    const [refreshFaucetBalance, setRefreshFaucetBalance] = useState(0);
     const [tezosDomainsClient] = useTezosDomains(tezos, network as NetworkType);
     const {
         loading: faucetIsLoading,
         pkh: faucetPKH,
-        balance: faucetBalance,
         error: faucetError,
-    } = useFaucet(tezos.getTK(), balanceRefresh);
+    } = useFaucet(tezos.getTK());
     const [info, setInfo] = useState("");
 
     const { register, handleSubmit, errors } = useForm<TransferParams>();
@@ -49,7 +48,7 @@ const Faucet = () => {
             setInfo(`operation ${op.hash} in progress`);
             await op.confirmation(1);
             setInfo(`operation ${op.hash} confirmed`);
-            setBalanceRefresh(balanceRefresh + 1);
+            setRefreshFaucetBalance(refreshFaucetBalance + 1);
         } catch (e) {
             setPanic(`oops something bad happened: ${JSON.stringify(e)}`);
         }
@@ -71,7 +70,10 @@ const Faucet = () => {
                 <div>
                     {panic && <Panic title="Operation error">{panic}</Panic>}
                     {info && showInfo(info)}
-                    <FaucetAccount balance={faucetBalance} pkh={faucetPKH} />
+                    <FaucetAccount
+                        refresh={refreshFaucetBalance}
+                        pkh={faucetPKH}
+                    />
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div>
                             <label className="block">
