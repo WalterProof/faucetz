@@ -1,5 +1,21 @@
 @tailwind base;
 
+@font-face {
+    font-family: "robotolight";
+    src: url("./fonts/roboto-light-webfont.woff2") format("woff2"),
+        url("./fonts/roboto-light-webfont.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "museo100";
+    src: url("./fonts/museo_100-webfont.woff2") format("woff2"),
+        url("./fonts/museo_100-webfont.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
 /* Sticky footer */
 #root {
     @apply flex;
@@ -12,6 +28,7 @@
 }
 
 body {
+    @apply font-roboto;
 }
 
 /* Footer */
@@ -28,13 +45,30 @@ footer {
 /* Header */
 header {
     @apply flex;
+    @apply flex-col;
+}
+
+h1 {
+    @apply flex;
+    @apply font-museo;
+    @apply items-center;
+    @apply mt-12;
+    @apply mb-12;
+}
+
+h1 span {
+    @apply ml-10;
+}
+
+/* Nav */
+.g-Nav {
+    @apply flex;
     @apply flex-col-reverse;
     @apply border-b;
-    @apply mb-2;
 }
 
 @media (min-width: 768px) {
-    header {
+    .g-Nav {
         @apply flex-row;
     }
 }
@@ -44,7 +78,6 @@ header {
     @apply flex;
     @apply items-end;
 }
-
 .g-Menu li {
     @apply mr-1;
 }
@@ -52,7 +85,6 @@ header {
     @apply -mb-px;
     @apply z-10;
 }
-
 .g-Menu a {
     @apply bg-white;
     @apply inline-block;
@@ -64,7 +96,6 @@ header {
 .g-Menu a:hover {
     @apply text-blue-800;
 }
-
 .g-Menu .is-active a {
     @apply bg-white;
     @apply border-l;
@@ -198,6 +229,7 @@ header {
 /* Faucet account */
 .f-FaucetAccount {
     @apply flex;
+    @apply my-4;
     @apply pt-2;
 }
 

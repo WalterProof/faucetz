@@ -15,6 +15,7 @@ Roadmap:
 -   connect wallet
 -   local infra
 -   add FA 1.2 and FA 2 tokens
+-   host on IPFS
 
 For alternatives testnet faucets, see:
 

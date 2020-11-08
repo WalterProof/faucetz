@@ -25,6 +25,10 @@ module.exports = {
             },
         },
         extend: {},
+        fontFamily: {
+            roboto: ["robotolight"],
+            museo: ["museo100"],
+        },
     },
     variants: {},
     plugins: [require("@tailwindcss/custom-forms")],
