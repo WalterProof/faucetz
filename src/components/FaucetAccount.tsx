@@ -24,7 +24,7 @@ const FaucetAccount: FunctionComponent<FaucetAccountProps> = ({
     useEffect(() => {
         let mounted = true;
 
-        const fetch = async () => {
+        (async () => {
             const tk = tezos.getTK();
 
             setTimeout(() => {}, 3000);
@@ -36,9 +36,7 @@ const FaucetAccount: FunctionComponent<FaucetAccountProps> = ({
                         2
                     )}`
                 );
-        };
-
-        fetch();
+        })();
 
         return () => {
             mounted = false;

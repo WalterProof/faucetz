@@ -30,7 +30,7 @@ const useFaucet = (tezos: TezosToolkit) => {
     const [pkh, setPKH] = useState("");
 
     useEffect(() => {
-        const initialize = async () => {
+        (async () => {
             try {
                 setLoading(true);
                 setError("");
@@ -47,8 +47,7 @@ const useFaucet = (tezos: TezosToolkit) => {
             } finally {
                 setLoading(false);
             }
-        };
-        initialize();
+        })();
     }, [tezos]);
 
     return { loading, pkh, error };
