@@ -68,14 +68,7 @@ h2 {
 /* Nav */
 .g-Nav {
     @apply flex;
-    @apply flex-col-reverse;
     @apply border-b;
-}
-
-@media (min-width: 768px) {
-    .g-Nav {
-        @apply flex-row;
-    }
 }
 
 /* Menu */
@@ -108,22 +101,6 @@ h2 {
     @apply border-r;
     @apply rounded-t;
     @apply text-blue-700;
-}
-
-/* Network selector */
-.g-NetworkSelector {
-    @apply p-2;
-    @apply pr-0;
-    @apply ml-auto;
-}
-.g-NetworkSelector > div {
-    @apply flex;
-    @apply items-center;
-    @apply justify-end;
-}
-.g-NetworkSelector span {
-    @apply pr-4;
-    @apply text-sm;
 }
 
 /* Display tez amount */
@@ -231,14 +208,28 @@ h2 {
     @apply mr-2;
 }
 
-/* Faucet account */
-.f-FaucetAccount {
+/* Faucet settings */
+.f-FaucetSettings {
     @apply flex;
-    @apply pt-2;
+    @apply flex-col;
+    @apply my-4;
 }
 
-.f-FaucetAccount div {
+@media (min-width: 768px) {
+    .f-FaucetSettings {
+        @apply flex-row;
+    }
+}
+
+/* Network selector */
+.f-FaucetSettings :nth-child(1) {
     @apply ml-auto;
+    @apply order-last;
+}
+
+.f-FaucetSettings > div:nth-child(1) span {
+    @apply pr-4;
+    @apply text-sm;
 }
 
 .f-FaucetAccount_explorer-link {

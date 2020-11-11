@@ -46,19 +46,19 @@ const FaucetAccount: FunctionComponent<FaucetAccountProps> = ({
     }, [pkh, refresh, tezos]);
 
     return (
-        <div className="f-FaucetAccount">
-            <div>
-                {shortenAddress(pkh)} <DisplayAmount amount={balance} />
-                <a
-                    href={explore(network, pkh)}
-                    target="_new"
-                    className="f-FaucetAccount_explorer-link btn"
-                >
-                    <span role="img" aria-label="explorer link to address">
-                        🌐
-                    </span>
-                </a>
-            </div>
+        <div>
+            <DisplayAmount amount={balance} />
+            <br />
+            {shortenAddress(pkh)}
+            <a
+                href={explore(network, pkh)}
+                target="_new"
+                className="f-FaucetAccount_explorer-link btn"
+            >
+                <span role="img" aria-label="explorer link to address">
+                    🌐
+                </span>
+            </a>
         </div>
     );
 };

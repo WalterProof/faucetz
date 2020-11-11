@@ -1,7 +1,6 @@
 type Nodes = { [key: string]: string };
 
 export const NODES: Nodes = {
-    carthagenet: "https://testnet-tezos.giganode.io",
     dalphanet: "https://dalphanet.smartpy.io",
     delphinet: "https://delphinet-tezos.giganode.io/",
 };

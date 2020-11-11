@@ -12,8 +12,6 @@ export const shortenAddress = (addr: string) =>
 
 export const explore = (network: string, address: string): string => {
     switch (network) {
-        case "carthagenet":
-            return `https://carthage.tzkt.io/${address}`;
         case "dalphanet":
             return `https://dalpha.tzstats.com/${address}`;
         case "delphinet":

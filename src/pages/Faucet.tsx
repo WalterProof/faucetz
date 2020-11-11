@@ -7,6 +7,7 @@ import FaucetAccount from "../components/FaucetAccount";
 import useFaucet from "../hooks/useFaucet";
 import useTezosDomains, { NetworkType } from "../hooks/useTezosDomains";
 import { Panic, Info } from "../components/Messages";
+import NetworkSelector from "../components/NetworkSelector";
 
 const Faucet = () => {
     const { tezos, network } = useContext(TezosContext);
@@ -70,10 +71,13 @@ const Faucet = () => {
                 <div>
                     {panic && <Panic title="Operation error">{panic}</Panic>}
                     {info && showInfo(info)}
-                    <FaucetAccount
-                        refresh={refreshFaucetBalance}
-                        pkh={faucetPKH}
-                    />
+                    <div className="f-FaucetSettings">
+                        <NetworkSelector />
+                        <FaucetAccount
+                            refresh={refreshFaucetBalance}
+                            pkh={faucetPKH}
+                        />
+                    </div>
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div>
                             <label className="block">
