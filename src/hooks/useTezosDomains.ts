@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { TezosDomainsClient } from "@tezos-domains/client";
 import { TezosWrapper } from "../Tezos";
 
-export type NetworkType = "delphinet" | "dalphanet";
+export type NetworkType = "delphinet" | "ebetanet";
 
 const useTezosDomains = (tezos: TezosWrapper, network: NetworkType) => {
     const [client, setClient] = useState<TezosDomainsClient | undefined>(
@@ -10,7 +10,7 @@ const useTezosDomains = (tezos: TezosWrapper, network: NetworkType) => {
     );
 
     useEffect(() => {
-        if (network === undefined || network === "dalphanet") return;
+        if (network !== "delphinet") return;
         setClient(new TezosDomainsClient({ tezos: tezos.getTK(), network }));
     }, [tezos, network]);
 

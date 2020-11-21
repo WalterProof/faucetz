@@ -1,7 +1,7 @@
 type Nodes = { [key: string]: string };
 
 export const NODES: Nodes = {
-    dalphanet: "https://dalphanet.smartpy.io",
+    ebetanet: "https://ebetanet.duckdns.org/",
     delphinet: "https://delphinet-tezos.giganode.io/",
 };
 

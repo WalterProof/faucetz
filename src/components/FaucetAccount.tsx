@@ -20,6 +20,7 @@ const FaucetAccount: FunctionComponent<FaucetAccountProps> = ({
 }) => {
     const { network, tezos } = useContext(TezosContext);
     const [balance, setBalance] = useState("");
+    const exlporeLink = explore(network, pkh);
 
     useEffect(() => {
         let mounted = true;
@@ -48,15 +49,17 @@ const FaucetAccount: FunctionComponent<FaucetAccountProps> = ({
             <DisplayAmount amount={balance} />
             <br />
             {shortenAddress(pkh)}
-            <a
-                href={explore(network, pkh)}
-                target="_new"
-                className="f-FaucetAccount_explorer-link btn"
-            >
-                <span role="img" aria-label="explorer link to address">
-                    🌐
-                </span>
-            </a>
+            {exlporeLink && (
+                <a
+                    href={exlporeLink}
+                    target="_new"
+                    className="f-FaucetAccount_explorer-link btn"
+                >
+                    <span role="img" aria-label="explorer link to address">
+                        🌐
+                    </span>
+                </a>
+            )}
         </div>
     );
 };
