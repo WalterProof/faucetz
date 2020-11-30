@@ -1,8 +1,4 @@
 module.exports = {
-    future: {
-        removeDeprecatedGapUtilities: true,
-        purgeLayersByDefault: true,
-    },
     purge: {
         enabled: true,
         content: [
@@ -31,5 +27,5 @@ module.exports = {
         },
     },
     variants: {},
-    plugins: [require("@tailwindcss/custom-forms")],
+    plugins: [require("@tailwindcss/forms")],
 };
