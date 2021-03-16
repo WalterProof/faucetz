@@ -2,9 +2,9 @@ type Nodes = { [key: string]: string };
 
 export const NODES: Nodes = {
     edonet: "https://edonet.duckdns.org/",
-    delphinet: "https://delphinet-tezos.giganode.io/",
+    florencenet: "https://florence-tezos.giganode.io/",
 };
 
-export const REPO_URL = "https://github.com/catsoap/faucetz";
+export const REPO_URL = "https://github.com/sjnnya/faucetz";
 
-export const DEFAULT_NETWORK = "delphinet";
+export const DEFAULT_NETWORK = "edonet";
