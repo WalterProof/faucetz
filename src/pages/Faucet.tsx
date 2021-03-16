@@ -31,8 +31,8 @@ const Faucet = () => {
         try {
             if (
                 tezosDomainsClient !== undefined &&
-                network === "delphinet" &&
-                p.to.endsWith(".delphi")
+                network === "edonet" &&
+                p.to.endsWith(".edo")
             ) {
                 setInfo(`resolving domain ${p.to}...`);
                 const address = await tezosDomainsClient.resolver.resolveNameToAddress(
@@ -51,6 +51,7 @@ const Faucet = () => {
             setInfo(`operation ${op.hash} confirmed`);
             setRefreshFaucetBalance(refreshFaucetBalance + 1);
         } catch (e) {
+            console.log(e);
             setPanic(`oops something bad happened: ${JSON.stringify(e)}`);
         }
     };
@@ -59,7 +60,7 @@ const Faucet = () => {
 
     const validateAddressInput = (value: string): boolean =>
         validateAddress(value) === ValidationResult.VALID ||
-        (value.endsWith(".delphi") && network === "delphinet");
+        (value.endsWith(".edo") && network === "edonet");
 
     return (
         <div>
@@ -102,8 +103,8 @@ const Faucet = () => {
                             <label className="block">
                                 <span className="text-gray-700">
                                     Destination address
-                                    {network === "delphinet"
-                                        ? " (or .delphi domain name)"
+                                    {network === "edonet"
+                                        ? " (or .edo domain name)"
                                         : ""}
                                     :
                                 </span>

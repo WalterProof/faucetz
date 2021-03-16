@@ -12,8 +12,10 @@ export const shortenAddress = (addr: string) =>
 
 export const explore = (network: string, address: string): string => {
     switch (network) {
-        case "delphinet":
-            return `https://delphi.tzkt.io/${address}`;
+        case "edonet":
+            return `https://edo2net.tzkt.io/${address}`;
+        case "florencenet":
+            return `https://florencenet.tzkt.io/${address}`;
         default:
             return "";
     }
