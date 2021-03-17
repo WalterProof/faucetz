@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { TezosWrapper } from "../Tezos";
 import { ConseilTezosDomainsClient } from "@tezos-domains/conseil-client";
+import { NODES } from "../config";
 
 export type NetworkType = "florencenet" | "edonet";
 
@@ -14,7 +15,7 @@ const useTezosDomains = (tezos: TezosWrapper, network: NetworkType) => {
 
         setClient(
             new ConseilTezosDomainsClient({
-                conseil: { server: "https://edonet-tezos.giganode.io/" },
+                conseil: { server: NODES.edonet },
                 network: "edonet",
                 caching: { enabled: true },
             })
