@@ -12,10 +12,10 @@ export const shortenAddress = (addr: string) =>
 
 export const explore = (network: string, address: string): string => {
     switch (network) {
-        case "edonet":
-            return `https://edo2net.tzkt.io/${address}`;
         case "florencenet":
             return `https://florencenet.tzkt.io/${address}`;
+        case "granadanet":
+            return `https://granadanet.tzkt.io/${address}`;
         default:
             return "";
     }

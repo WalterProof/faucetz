@@ -3,7 +3,7 @@ import { TezosWrapper } from "../Tezos";
 import { ConseilTezosDomainsClient } from "@tezos-domains/conseil-client";
 import { NODES } from "../config";
 
-export type NetworkType = "florencenet" | "edonet";
+export type NetworkType = "florencenet" | "granadanet";
 
 const useTezosDomains = (tezos: TezosWrapper, network: NetworkType) => {
     const [client, setClient] = useState<ConseilTezosDomainsClient | undefined>(
@@ -11,12 +11,12 @@ const useTezosDomains = (tezos: TezosWrapper, network: NetworkType) => {
     );
 
     useEffect(() => {
-        if (network !== "edonet") return;
+        if (network === "florencenet") return;
 
         setClient(
             new ConseilTezosDomainsClient({
-                conseil: { server: NODES.edonet },
-                network: "edonet",
+                conseil: { server: NODES.network },
+                network: network,
                 caching: { enabled: true },
             })
         );
